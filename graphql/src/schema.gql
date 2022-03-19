@@ -2,6 +2,12 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type KnownFilter {
+  id: Int!
+  field_name: String!
+  type: String!
+}
+
 type User {
   id: Int!
   age: Int!
@@ -13,4 +19,5 @@ type User {
 
 type Query {
   users(name: String, age: Float, age_min: Float, age_max: Float, happy: Boolean, healthy: Boolean, busy: Boolean): [User!]!
+  knownFilter: [KnownFilter!]!
 }

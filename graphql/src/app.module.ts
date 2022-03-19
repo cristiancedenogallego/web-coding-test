@@ -6,6 +6,7 @@ import {join} from 'path';
 import {UsersResolver} from './users/resolvers/users.resolver';
 import { UsersModule } from './users/users.module';
 import {User} from './users/entities/user.entity';
+import {KnownFilters} from './users/entities/knownFilters.entity';
 
 
 @Module({
@@ -19,6 +20,7 @@ import {User} from './users/entities/user.entity';
       database: process.env.MYSQL_DATABASE,
       entities: [
 	User,
+	KnownFilters,
       ],
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
