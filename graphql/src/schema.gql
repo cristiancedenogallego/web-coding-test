@@ -1,0 +1,16 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  id: Int!
+  age: Int!
+  name: String!
+  happy: Boolean!
+  healthy: Boolean!
+  busy: Boolean!
+}
+
+type Query {
+  users: [User!]!
+}
