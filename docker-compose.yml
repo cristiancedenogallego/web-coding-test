@@ -1,0 +1,56 @@
+version: "3.9"
+services:
+  dev:
+    container_name: nestjs_api_dev
+    image: nestjs-api-dev:1.0.0
+    build:
+      context: ./graphql
+      target: development
+      dockerfile: Dockerfile
+    command: npm run start:debug
+    ports:
+      - 3000:3000
+      - 9229:9229
+    networks:
+      - app-network
+    volumes:
+      - ./graphql:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: unless-stopped
+  prod:
+    container_name: nestjs_api_prod
+    image: nestjs-api-prod:1.0.0
+    build:
+      context: ./graphql
+      target: production
+      dockerfile: ./Dockerfile
+    command: npm run start:prod
+    ports:
+      - 3000:3000
+      - 9229:9229
+    networks:
+      - app-network
+    volumes:
+      - ./graphql:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: unless-stopped
+  db:
+    platform: linux/x86_64
+    image: mysql
+    restart: always
+    env_file: .env
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - my-db:/var/lib/mysql
+      - ./scripts/1.sql:/docker-entrypoint-initdb.d/1.sql
+    networks:
+      - app-network
+networks:
+  app-network:
+    driver: bridge
+volumes:
+  my-db:
+  node_modules:
