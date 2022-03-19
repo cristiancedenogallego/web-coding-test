@@ -12,5 +12,5 @@ type User {
 }
 
 type Query {
-  users: [User!]!
+  users(name: String, age: Float, age_min: Float, age_max: Float, happy: Boolean, healthy: Boolean, busy: Boolean): [User!]!
 }
