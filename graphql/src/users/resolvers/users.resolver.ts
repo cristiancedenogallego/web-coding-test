@@ -2,13 +2,13 @@ import {Query, Resolver, Args} from "@nestjs/graphql";
 import {User} from "../models/user.model";
 import {UsersService} from "../services/users.service";
 import {GetUsersArgs} from '../dto/get-users.args';
-import { MoreThanOrEqual, LessThanOrEqual, Between } from "typeorm";
+import { MoreThanOrEqual, LessThanOrEqual, Between, Like } from "typeorm";
 
 type UserEntityFilters = {
   // NOTE: This is a workaround because that FindOperator is not exported from typeorm
   // https://github.com/typeorm/typeorm/issues/3589
   age?: any;
-  name?: string;
+  name?: any;
   happy?: boolean;
   healthy?: boolean;
   busy?: boolean;
@@ -27,7 +27,7 @@ export class UsersResolver {
 	happy: args.happy,
 	healthy: args.healthy,
 	busy: args.busy,
-	name: args.name,
+	name: args.name ? Like(`%${args.name}%`) : undefined,
     };
 
     if (args.age) {

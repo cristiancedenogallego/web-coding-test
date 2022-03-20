@@ -15,13 +15,15 @@ function KnownFilters() {
   }
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <p></p>;
   }
 
-  return <div>
+  return <div className="container">
+    <h3 className="mt-5 mb-3">Filter data</h3>
     <KnownFiltersInputs
       filters={knownFilter}
     /> 
+    <h3 className="mt-3 mb-3">Users - Pick Columns</h3>
     <KnownFiltersPickFields
       filters={knownFilter}
     />

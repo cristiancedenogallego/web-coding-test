@@ -1,6 +1,6 @@
 import './App.css'
 
-import React, { useState } from 'react'
+import React from 'react'
 import {
   ApolloClient,
   InMemoryCache,
@@ -8,6 +8,7 @@ import {
 } from "@apollo/client";
 import KnownFilters from './components/KnownFilters';
 import UsersTable from './components/UsersTable';
+import {GlobalProvider} from './state/GlobalProvider';
 
 const client = new ApolloClient({
   uri: 'http://localhost:3000/graphql',
@@ -16,12 +17,16 @@ const client = new ApolloClient({
 
 function App() {
   return (
-    <ApolloProvider client={client}>
-      <div className="container">
-	<KnownFilters />
-	<UsersTable />
-      </div>
-    </ApolloProvider>
+    <GlobalProvider>
+      <ApolloProvider client={client}>
+	<div className="header-decoration"></div>
+	<div className="card container my-5 rounded">
+	  <KnownFilters />
+	  <UsersTable />
+	</div>
+      </ApolloProvider>
+    </GlobalProvider> 
+    
   )
 }
 
