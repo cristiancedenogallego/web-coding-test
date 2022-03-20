@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 5.7.23, for macos10.13 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.16, for osx10.12 (x86_64)
 --
 -- Host: 127.0.0.1    Database: db
 -- ------------------------------------------------------
--- Server version	5.7.37
+-- Server version	8.0.28
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+ SET NAMES utf8mb4 ;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -16,15 +16,40 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `known_filters`
+--
+
+DROP TABLE IF EXISTS `known_filters`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `known_filters` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `field_name` varchar(200) DEFAULT NULL,
+  `type` enum('numeric','text','boolean') DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `known_filters`
+--
+
+LOCK TABLES `known_filters` WRITE;
+/*!40000 ALTER TABLE `known_filters` DISABLE KEYS */;
+INSERT INTO `known_filters` VALUES (1,'name','text'),(2,'happy','boolean'),(3,'age','numeric'),(4,'healthy','boolean'),(5,'busy','boolean');
+/*!40000 ALTER TABLE `known_filters` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `users`
 --
 
 DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `age` int(2) NOT NULL DEFAULT '18',
+  `id` int NOT NULL AUTO_INCREMENT,
+  `age` int NOT NULL DEFAULT '18',
   `happy` tinyint(1) NOT NULL DEFAULT '1',
   `healthy` tinyint(1) NOT NULL DEFAULT '1',
   `busy` tinyint(1) NOT NULL DEFAULT '1',
@@ -56,4 +81,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-03-19 10:42:35
+-- Dump completed on 2022-03-19 21:57:50

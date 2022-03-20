@@ -18,6 +18,8 @@ services:
       - ./graphql:/usr/src/app
       - /usr/src/app/node_modules
     restart: unless-stopped
+    depends_on:
+      - db
   prod:
     env_file: .env
     container_name: nestjs_api_prod
@@ -36,6 +38,8 @@ services:
       - ./graphql:/usr/src/app
       - /usr/src/app/node_modules
     restart: unless-stopped
+    depends_on:
+      - db
   db:
     platform: linux/x86_64
     image: mysql
@@ -50,6 +54,12 @@ services:
       - ./scripts/1.sql:/docker-entrypoint-initdb.d/1.sql
     networks:
       - app-network
+  client:
+    image: nginx
+    ports:
+        - 8000:80
+    volumes:
+        - ./webapp/dist:/usr/share/nginx/html
 networks:
   app-network:
     driver: bridge
